@@ -22,7 +22,7 @@ which, in a way, is similar to staff notation:
 
 Both map pitch to vertical position and time/rhythm, roughly, to a horizontal position. In the case of staff notation, there is wrapping to fit the staves on a page. I thought it would be interesting to take this idea and compress it, so that individual notes are less important and overall shapes and patterns become more important—essentially, I created an aggregate shape for an entire piece, which illuminates larger patterns within the piece as well as how the piece compares to other pieces. The result looked like this:
 
-!(sample)[sample.png]
+![sample](sample.png)
 
 Because everything was done procedurally, this time I was able to easily create this sort of shape for many pieces—I did fifteen—, and to add an additional comparative element, I decided to do three pieces from each of five musical periods. I chose pieces that I had played before so that I would know intimately how they sounded and if the resulting shape was a good representation. In addition, I did my best to give a good cross section of each period as a whole since they are not entirely homogenous. 
 
@@ -31,7 +31,7 @@ This project was very much more accessible with the skills I have developed this
 The resulting product can be seen [here](rikghosh.github.io/compform/grad).
 
 
-References
+## References
 [1] “Create, Play and Print Beautiful Sheet Music.” Free Music Composition and Notation Software | MuseScore, musescore.org/en.
 
 [2] Jonas, Peter. “Shoogle/Midicsv-Process.” GitHub, 2017, github.com/shoogle/midicsv-process.
