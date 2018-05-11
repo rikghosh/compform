@@ -28,7 +28,7 @@ Because everything was done procedurally, this time I was able to easily create 
 
 This project was very much more accessible with the skills I have developed this semester. The most notable technique I used, I think, is the facility with creating work both procedurally and manually. Before I hadn’t really thought of creating work with code in p5 and then editing or using it elsewhere. Here, I generated the shape for each piece in p5, saved them all as images, and then incorporated them into a regular html webpage, which I used to frame the work and provide narrative and historical motivation. 
 
-The resulting product can be seen [here](rikghosh.github.io/compform/grad).
+The resulting product can be seen [here](http://rikghosh.github.io/compform/grad).
 
 
 ## References
