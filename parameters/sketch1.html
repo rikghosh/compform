@@ -1,0 +1,64 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+       <!--p5 core library-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/addons/p5.dom.js"></script>
+       <script>
+            var radius_slider, track, pause, play;
+            
+            var x = 0;
+            var y = 0;
+            var looping = 1;
+            
+            function setup() {
+                createCanvas(window.innerWidth, window.innerHeight * .5);
+                background(250);
+            
+                createP('Brush Size');
+                size_slider = createSlider(1, 50, 10);
+                
+                createP('Radius of Rotation');
+                radius_slider = createSlider(10, 200, 50);
+                
+                createP('');
+                track = createButton('Clear');
+                
+                pause = createButton('Pause');
+                
+                play = createButton('Play');
+            }
+            
+            
+            function draw() {
+                
+                track.mousePressed(function event() {
+                    background(250);
+                })
+                
+                pause.mousePressed(function event() {
+                    frameRate(0);
+                    noLoop();
+                })
+                
+                play.mousePressed(function event() {
+                    frameRate(60);
+                    loop();
+                })
+                
+                var size = size_slider.value();
+                var radius = radius_slider.value();
+                
+                ellipse(radius*sin(x) + width/2, radius*cos(x) + height/2, size);
+                x += PI/128;
+                y += PI/128;
+                
+            }
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

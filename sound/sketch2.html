@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html style="font-family: sans-serif;">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.sound.js" type="text/javascript"></script>
+    <style>
+        html {
+            background: #000;
+        }
+
+    </style>
+    <script>
+    var frequency = 220;
+    var myOscillator;
+    var oscOne, oscTwo, oscThree, oscFour, oscFive;
+    var notesOne;
+    var notesTwo;
+    var notesThree;
+    var notesFour;
+    var notesFive;
+    var i = 0;
+    var j = 0;
+    
+    function setup() {
+        createCanvas(400, 200);
+        
+        notesOne = [60, 60, 60, 59]
+        notesTwo = [64, 65, 64, 62]
+        notesThree = [67, 69, 67, 67]
+        notesFour = [76, 77, 76, 74] 
+        notesFive = [84, 83, 81, 80, 79, 77, 76, 74, 72, 74, 76, 77, 79, 80, 81, 83]
+        
+        
+        
+
+        frameRate(16);
+        
+        oscOne = new p5.Oscillator('sine');
+        oscOne.amp(0.5);
+        oscOne.freq(261);
+        oscOne.start();
+        
+        oscTwo = new p5.Oscillator('sine');
+        oscTwo.amp(0.5);
+        oscTwo.freq(265);
+        oscTwo.start();
+        
+        oscThree = new p5.Oscillator('sine');
+        oscThree.amp(0.5);
+        oscThree.freq(330);
+        oscThree.start();
+        
+        oscFour = new p5.Oscillator('sine');
+        oscFour.amp(0.5)
+        oscFour.freq(333);
+        oscFour.start();
+        
+        
+        // oscFive = new p5.Oscillator('sine');
+        // oscFive.amp(0.5)
+        // oscFive.freq(midiToFreq(76));
+        
+        
+        
+    
+    
+    
+        startButton = createButton('start');
+        startButton.mousePressed(start);
+    
+        stopButton = createButton('stop');
+        stopButton.mousePressed(stop);
+    
+        recordButton = createButton('record');
+        
+        // startFour = createButton('startFour');
+        // startFour.mousePressed(function() { oscFour.start() })
+        
+        // startFive = createButton('startFive');
+        // startFive.mousePressed(function() { oscFive.start() })
+    
+        recordButton.mousePressed(function() {
+            record(10000);
+        });
+    
+    }
+    
+    function start() {
+        oscOne.start();
+        oscTwo.start();
+        oscThree.start();
+    }
+    
+    function stop() {
+        oscOne.stop();
+        oscTwo.stop();
+        oscThree.stop();
+    }
+    
+    function draw() {
+        background(50);
+        
+        counter = floor(frameCount/frameRate())
+        
+        i += (1/16);
+        j += 1;
+        
+        
+        
+        // oscOne.freq(midiToFreq(notesOne[floor(i)%4]));
+        // oscTwo.freq(midiToFreq(notesTwo[floor(i)%4]));
+        // oscThree.freq(midiToFreq(notesThree[floor(i)%4]));
+        // oscFour.freq(midiToFreq(notesFour[floor(i*8)%4]));
+        // oscFive.freq(midiToFreq(notesFive[floor(i*8)%16]));
+        
+        
+        // if (j%2 == 0) {
+        //     oscFour.amp(3);
+        // }
+        // else {
+        //     oscFour.amp(0);
+        // }
+        
+    
+    }
+    
+    
+    // uses the p5 SoundRecorder and SoundFile classes to record the audio output.
+    // begins recording when called. records for _length_ time in milliseconds.
+    function record(length) {
+        var soundRecorder = new p5.SoundRecorder();
+        var soundFile = new p5.SoundFile();
+        soundRecorder.record(soundFile);
+        setTimeout(function() {
+            console.log("Recording Complete");
+            soundRecorder.stop();
+            save(soundFile, "output.wav");
+        }, length);
+    }
+
+
+        
+
+    </script>
+  </head>
+  <body>
+     <div id='holder'></div>
+  </body>
+</html>

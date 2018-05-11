@@ -1,0 +1,67 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+       <!--p5 core library-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/addons/p5.dom.js"></script>
+       <script>
+            var amp_slider;
+            var periods_slider;
+            var speeds_slider;
+            var xs = [];
+            var ys = [];
+            var phase = 0;
+                
+                
+            function setup() {
+                createCanvas(window.innerWidth, window.innerHeight * .5);
+                background(250);
+                
+                for (var i=1; i<1000; i++) {
+                    xs[i] = map(i, 1, 1000, 0, 2*PI);
+                    ys[i] = 100*sin(1*xs[i]) + height/2;
+                }
+                
+                
+                for (var i=1; i<1000; i++) {
+                    ellipse(xs[i]*(width/(2*PI)), ys[i], 5);
+                }
+                // fill(100);
+                // noStroke();
+                // rectMode(CENTER);
+            
+                createP('Amplitude');
+                amp_slider = createSlider(0, 200, 100);
+            
+                createP('Periods');
+                periods_slider = createSlider(1, 15, 1);
+                
+                createP('Slowness');
+                speeds_slider = createSlider(16, 128, 64)
+            }
+            
+            
+            function draw() {
+                background(250);
+                var amp = amp_slider.value();
+                var periods = periods_slider.value();
+                var speed = speeds_slider.value();
+                
+                phase += PI/speed;
+                for (var i=1; i<1000; i++) {
+                    xs[i] = map(i, 1, 200, 0, 2*PI);
+                    ys[i] = amp*sin(periods*xs[i] + phase) + height/2;
+                }
+                 
+                for (var i=1; i<1000; i++) {
+                    ellipse(xs[i]*(width/(2*PI)), ys[i], 5);
+                }
+            }
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

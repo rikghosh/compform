@@ -1,0 +1,57 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+       <!--p5 core library-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script type="text/javascript" src="turtle.js"></script>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/addons/p5.dom.js"></script>
+       <script>
+       
+            // require https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js
+            // require /turtles/turtle/turtle.js
+            
+            var myTurtle;
+            
+            var sizer = 200;
+            var angler = 100;
+            var angleslider;
+            
+            function setup() {
+            	createCanvas(500, 500);
+            	myTurtle = new Turtle();
+            	createP('Angle');
+            	angle_slider = createSlider(1, 360, 1);
+            }
+            
+            function draw() {
+                angler = angle_slider.value();
+                sizer=(height/300)*angler;
+            	background(50);
+            
+            	noFill();
+            	stroke(255, 255, 255, 180);
+            	strokeWeight(2);
+            
+            
+            	myTurtle.penUp();
+            	myTurtle.moveTo(width/2, height/2);
+                ellipse(width/2, height/2, 15)
+            	myTurtle.penDown();
+            
+            	for (var i = 0; i < 72; i++) {
+            		myTurtle.moveForward(sizer);
+            		myTurtle.turnRight(angler);
+            	}
+            
+            	frameRate(5);
+            }
+
+
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

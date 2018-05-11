@@ -1,0 +1,75 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+       <!--p5 core library-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/addons/p5.dom.js"></script>
+       <script>
+            // require https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js
+
+            var xp;
+            
+            function preload() {
+                xp = loadImage("xp2.png");
+            }
+            
+            function setup() {
+                createCanvas(500, 500);
+            }
+            
+            function draw() {
+                background(0);
+            
+                // for (var j = 0; j < 10; j++) {
+                //     var bird = setPixels(floor(random(100)), floor(random(30)));
+                //     for (var i = 0; i < bird.length; i++) {
+                //         xp.set(bird[i][0], bird[i][1], 0);
+                //     }
+                //      xp.updatePixels();
+                // }
+            
+                for (var y = 0; y < xp.height; y++) {
+                    for (var x = 0; x < xp.width; x++) {
+                        var in_color = xp.get(x, y);
+            
+                    
+                        var r = red(in_color);
+                        var g = green(in_color);
+                        var b = blue(in_color);
+            
+                        var out_color;
+                        // if (r === 255) {
+                        //     out_color = color(0, 255, 0);
+                        // } else {
+                        //     out_color = color(x*19, 0, 0);
+                        // }
+            
+                        // worldImage.set(x, y, out_color);
+                        
+                        xp.set(x, y, xp.get((x*2)%xp.width, y))
+                        
+                        
+                        xp.updatePixels();
+                        
+                    }
+                }
+            
+                save(xp, '1.png')
+                noSmooth();
+                image(xp, 0, 0, width, height);
+            
+                noLoop();
+            }
+            
+            // function setPixels(x, y) {
+            //     return [[x-2, y-1], [x-1, y-1], [x, y], [x+1, y-1], [x+2, y-1]];
+            // }
+
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

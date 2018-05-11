@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html style="font-family: sans-serif;">
+  <head>
+    <!--p5 core library, minified-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.13/p5.min.js" type="text/javascript"></script>
+    <!--p5 interaction with the DOM-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.13/addons/p5.dom.min.js" type="text/javascript"></script>
+    <script src="./rita-full.min.js" type="text/javascript"></script>
+    <style>
+        html {
+            background: #f5f5f5;
+        }
+
+    </style>
+    <script>
+
+        var data;
+        var joined;
+        var words;
+        
+        var one = [];
+        var two = [];
+        var three = [];
+        var four = [];
+        var five = [];
+        
+        var num;
+        var line;
+    
+    
+        
+        var garamond;
+        
+        function preload() {
+          data = loadStrings('text.txt');
+          garamond = loadFont('adobegaramond.otf');
+          
+        }
+        
+        function setup() {
+            var canvas = createCanvas(windowWidth, windowHeight*1.5);
+            canvas.parent('holder');
+            
+            textFont(garamond);
+            
+            
+            
+            var joined = data.join('\n')
+            
+            joined = RiTa.stripPunctuation(joined);
+            
+            words = RiTa.tokenize(joined)
+            
+            words.forEach(function(word) {
+                word = word.replace("'", "");
+                word = word.replace("-", "");
+                word = word.replace("–", "");
+                var syls = RiTa.getSyllables(word);
+                if (syls.split('/').length == 1) {
+                    one.push(word);
+                }
+                if (syls.split('/').length == 2) {
+                    two.push(word);
+                }
+                if (syls.split('/').length == 3) {
+                    three.push(word);
+                }
+                if (syls.split('/').length == 4) {
+                    four.push(word);
+                }
+                if (syls.split('/').length == 5) {
+                    five.push(word);
+                }
+            });
+        
+            
+            textSize(50);
+            
+            text(getLine(), 100, 100);
+            text(rl(one) + getLine() + rl(one), 100, 200);
+            text(getLine(), 100, 300);
+
+            
+            
+        }
+        
+        function getLine() {
+            num = ceil(random(17));
+            
+            if (num == 1) {
+                line = rl(five);
+            }
+            if (num == 2) {
+                line = rl(four) + rl(one);
+            }
+            if (num == 3) {
+                line = rl(three) + rl(two);
+            }
+            if (num == 4) {
+                line = rl(three) + rl(one) + rl(one);
+            }
+            if (num == 5) {
+                line = rl(two) + rl(three);
+            }
+            if (num == 6) {
+                line = rl(two) + rl(two) + rl(one);
+            }
+            if (num == 7) {
+                line = rl(two) + rl(one) + rl(two);
+            }
+            if (num == 8) {
+                line = rl(two) + rl(one) + rl(one) + rl(one);
+            }
+            if (num == 9) {
+                line = rl(one) + rl(four);
+            }
+            if (num == 10) {
+                line = rl(one) + rl(three) + rl(two);
+            }
+            if (num == 11) {
+                line = rl(one) + rl(three) + rl(one) + rl(one);
+            }
+            if (num == 12) {
+                line = rl(one) + rl(two) + rl(two);
+            }
+            if (num == 13) {
+                line = rl(one) + rl(two) + rl(one) + rl(one);
+            }
+            if (num == 14) {
+                line = rl(one) + rl(one) + rl(three);
+            }
+            if (num == 15) {
+                line = rl(one) + rl(one) + rl(two) + rl(one);
+            }
+            if (num == 16) {
+                line = rl(one) + rl(one) + rl(one) + rl(two);
+            }
+            if (num == 17) {
+                line = rl(one) + rl(one) + rl(one) + rl(one);
+            }
+            
+            return line;
+        }
+        
+        function rl(num) {
+            return eval(num)[floor(random(eval(num).length))] + ' ';
+        }
+
+
+
+        
+
+    </script>
+  </head>
+  <body>
+     <div id='holder'></div>
+  </body>
+</html>

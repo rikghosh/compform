@@ -1,0 +1,71 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+       <!--p5 core library-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script type="text/javascript" src="turtle.js"></script>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/addons/p5.dom.js"></script>
+       <script>
+       
+            // require https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js
+            // require /turtles/turtle/turtle.js
+            
+            var myTurtle;
+            
+            
+            function setup() {
+            	createCanvas(window.innerWidth, window.innerHeight);
+            	myTurtle = new Turtle();
+            
+            }
+            
+            function draw() {
+            	background(255);
+            
+            	noFill();
+            	stroke(0, 80);
+            	strokeWeight(2);
+            
+            
+            	myTurtle.penUp();
+            	
+            	myTurtle.moveTo(width/2, height/2);
+            	myTurtle.penDown();
+            	
+            	
+            	
+            	drawEyes(width/4, height/6, 1);
+            	drawEyes(3*width/4, height/6, 1);
+                
+                noLoop();
+            }
+            
+            function drawEyes(x, y, size) {
+                myTurtle.moveTo(x, y)
+                for(var i = 0; i < 360; i ++) {
+            	    myTurtle.moveForward(size);
+            	    myTurtle.turnRight(1);
+            	}
+            	
+            	myTurtle.penUp();
+            	myTurtle.moveTo(x, y+(90*size/PI));
+            	myTurtle.penDown();
+            	
+            	for(var i = 0; i < 360; i ++) {
+            	    myTurtle.moveForward(size/2);
+            	    myTurtle.turnRight(1);
+            	}
+            }
+            
+            
+        
+
+
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

@@ -1,0 +1,113 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+       <!--p5 core library-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/addons/p5.dom.js"></script>
+       <script>
+            // require https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.min.js
+
+            // draws some grass with density driven by a luminance map image
+            
+            var testImage;
+            
+            function preload() {
+                testImage = loadImage("eyes.png");
+                noLoop();
+            }
+            
+            function setup() {
+                // create a place to draw
+                createCanvas(640, 224);
+            
+                // load up the pixel[] array so we can read colors out of it later
+                testImage.loadPixels();
+            }
+            
+            
+            function draw() {
+            
+                noStroke();
+                background(0);
+                colorMode(HSB, 360, 100, 100, 100);
+                for (var x = 0; x < width; x += 5) {
+                    for (var y = 0; y < height; y += 5) {
+                        fill(215, noise(x*0.001, y*0.001)*80, noise(x*0.009, y*0.009)*40, 100)
+                        rect(x, y, 15, 15);
+                    }
+                }
+                colorMode(RGB, 255, 255, 255, 255);
+                
+                
+                // set drawing styles
+                stroke(255, 0, 0);
+                fill(255, 255, 255);
+                stroke(251, 245, 146, 80);
+        
+            
+                // loop over every x,y pixel coordinate in the image
+                for (x = 0; x < 640; x++) {
+                    for (y = 0; y < 224; y++) {
+            
+                        // slow
+                        // this is _really_ slow, it might crash your browser
+                        // var pixelRed = red(testImage.get(x, y));
+            
+                        // quick
+                        var pixelOpac = getQuick(testImage, x, y)[3];
+            
+            
+                        // pick a random value and compare it pixelRed
+                        // for example:
+                        // if pixelRed is 0, we'll never draw
+                        // if pixelRed is 255, we'll always draw
+                        // if pixelRed is 127, we'll draw 50% of the time
+                        if (pixelOpac != 0 && random() < 0.05) {
+                            drawStar(x, y);
+                        }
+                    }
+                };
+            
+                noLoop();
+            }
+            
+            function drawStar(x, y) {
+                star(x, y, 1, 4, 5);
+            }
+            
+            // from p5 documentation
+            function star(x, y, radius1, radius2, npoints) {
+                var angle = TWO_PI / npoints;
+                var halfAngle = angle/2.0;
+                beginShape();
+                for (var a = 0; a < TWO_PI; a += angle) {
+                var sx = x + cos(a) * radius2;
+                var sy = y + sin(a) * radius2;
+                vertex(sx, sy);
+                sx = x + cos(a+halfAngle) * radius1;
+                sy = y + sin(a+halfAngle) * radius1;
+                vertex(sx, sy);
+                }
+                endShape(CLOSE);
+            }
+            
+           
+            function getQuick(img, x, y) {
+            
+                var i = (y * img.width + x) * 4;
+                return [
+                    img.pixels[i],
+                    img.pixels[i + 1],
+                    img.pixels[i + 2],
+                    img.pixels[i + 3],
+                ];
+            }
+
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

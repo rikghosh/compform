@@ -1,0 +1,88 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.5/paper-full.min.js"></script>
+       <script type="text/paperscript" canvas ="myCanvas">
+       
+            var circles = [];
+            var xpt = 400;
+            var ypt = 300; 
+            
+            circles[0] = new Path.Circle([xpt, ypt], 300);
+            circles[0].fillColor = new Color(Math.random(), Math.random(), Math.random(), 0.25);
+            
+            
+            for (var i = 1; i < 100; i ++) {
+                circles[i] = [];
+                drawFourCircles(circles[1], xpt, ypt, 300/i);
+            }
+            // circles[1] = [];
+            // circles[2] = [];
+            // drawFourCircles(circles[1], xpt, ypt, 300);
+            // drawFourCircles(circles[2], xpt, ypt, 150);
+            
+            // for (var i = 0; i < circles[1].length; i++) {
+            //     drawFourCircles[circles[1][i], ]
+            // }
+            
+            
+            
+            
+            
+            // for (var i = 1; i < 100; i++) {
+            
+            //     xpt += 10;
+            //     circles[i] = new Path.Circle([xpt, ypt], 10);
+            //     circles[i].fillColor = new Color(0.25, 0.25);
+            // }
+       
+            // circles[1] = new Path.Circle([400, 300], 150);
+            // circles[1].fillColor = 'red';
+            
+            // circles[2] = new Path.Circle([300, 250], 150);
+            // circles[2].fillColor = 'black';
+            
+            function drawFourCircles(circles, xpt, ypt, radius) {
+                circles[0] = new Path.Circle([xpt - radius, ypt], radius/2);
+                circles[0].fillColor = new Color(Math.random(), Math.random(), Math.random(), 0.25);
+                
+                
+                circles[1] = new Path.Circle([xpt + radius, ypt], radius/2);
+                circles[1].fillColor = new Color(Math.random(), Math.random(), Math.random(), 0.25);
+                
+                circles[2] = new Path.Circle([xpt, ypt - radius], radius/2);
+                circles[2].fillColor = new Color(Math.random(), Math.random(), Math.random(), 0.25);
+                
+                circles[3] = new Path.Circle([xpt, ypt + radius], radius/2);
+                circles[3].fillColor = new Color(Math.random(), Math.random(), Math.random(), 0.25);
+                
+            }
+            
+            function onKeyDown(event) {
+                if (event.key === 's') {
+                    downloadAsSVG();
+                }
+            }
+            
+            function downloadAsSVG(fileName) {
+                // use default name if not provided
+                fileName = fileName || "output.svg";
+            
+                // create a data url of the file
+                var svgData = project.exportSVG({ asString: true });
+                var url = "data:image/svg+xml;utf8," + encodeURIComponent(svgData);
+            
+                // create a link to the data, and "click" it
+                var link = document.createElement("a");
+                link.download = fileName;
+                link.href = url;
+                link.click();
+            }
+       </script>
+   </head>
+   <body>
+       <canvas id="myCanvas" style="width: 800px; height: 600px;"></canvas>
+   </body>
+</html>

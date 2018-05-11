@@ -1,0 +1,58 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+       <!--p5 core library-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/addons/p5.dom.js"></script>
+       <script>
+            var happiness_slider;
+            var radius;
+                
+            function setup() {
+                createCanvas(window.innerWidth, window.innerHeight * .5);
+                background(250);
+                // noStroke();
+                
+                strokeWeight(5);
+                
+                fill(250);
+                
+                radius = (min(width, height) - 50)/2;
+            
+                createP('Happiness');
+                happiness_slider = createSlider(-20, 20, 0);
+            }
+            
+            
+            function draw() {
+                
+                background(250);
+                
+                ellipse(width/2, height/2, radius*2);
+            
+                var happiness = happiness_slider.value();
+                
+                if (happiness > 0) {
+                    stroke(0, 200, 0);
+                }
+                else if (happiness < 0) {
+                    stroke(200, 0, 0);
+                }
+                else {
+                    stroke(0);
+                }
+                
+                curve(width/2, height/2 - 0.3*radius + radius*0.1*happiness, width/2 + 0.3*radius, height/2 - 0.3*radius + 0.005*happiness*radius, width/2 + 0.6*radius, height/2 - 0.3*radius + 0.005*happiness*radius, width/2 + radius, height/2 - 0.3*radius + radius*0.1*happiness);
+                curve(width/2 - radius, height/2 - 0.3*radius + radius*0.1*happiness, width/2 - 0.6*radius, height/2 - 0.3*radius + 0.005*happiness*radius, width/2 - 0.3*radius, height/2 - 0.3*radius + 0.005*happiness*radius, width/2, height/2 - 0.3*radius + radius*0.1*happiness);
+                curve(width/2 - radius, height/2 + 0.5*radius - radius*0.1*happiness, width/2 - 0.6*radius, height/2 + 0.5*radius - 0.005*happiness*radius, width/2 + 0.6*radius, height/2 + 0.5*radius - 0.005*happiness*radius, width/2 + radius, height/2 + 0.5*radius - radius*0.1*happiness);
+            
+            }
+            
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

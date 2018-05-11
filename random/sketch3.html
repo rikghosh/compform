@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+   <head>
+       <!--p5 core library-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script>
+           function setup() {
+               createCanvas(windowWidth, windowHeight);
+               var sentence = 'Let us go, through certain half-deserted streets, The muttering retreats Of restless nights in one-night cheap hotels And sawdust restaurants with oyster-shells.';
+
+               var x = 20;
+               var y = height/4;
+               
+               textSize(25); 
+               
+               
+               noStroke();
+               
+               for (var i=0; i<sentence.length; i++) {
+                   fill(0);
+                   var direction = floor(random()*2);
+                   if (direction == 0 && x < width - 100) {
+                      x += 20;
+                      y += 10;
+                      text(sentence[i], x, y);
+                   fill (20, 200, 100, 30);
+                   ellipse(x, y, 30, 30);
+                   }
+                   else if (direction == 1 && x < width - 100) {
+                      x += 20;
+                      y -= 10;
+                      text(sentence[i], x, y);
+                   }
+                   else {
+                       x = 20;
+                       y += height/4;
+                   }
+                
+               }
+           }
+
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

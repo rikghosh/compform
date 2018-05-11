@@ -1,0 +1,108 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+       <!--p5 core library-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/addons/p5.dom.js"></script>
+       <script>
+            var size_slider;
+            var speed_slider;
+            var xs = [];
+            var ys = [];
+            var img;
+                
+            function preload() {
+                img = loadImage("man.png");
+                // image attribution: <a target="_blank" href="https://www.vexels.com/vectors/preview/129666/businessman-walking-with-umbrella"> Businessman walking with umbrella </a> |   Designed by Vexels.com
+            }
+                
+            function setup() {
+                createCanvas(window.innerWidth, window.innerHeight * .5);
+                background(250);
+                noStroke();
+                fill(173,216,230);
+                
+                
+                for (i=0; i<200; i++) {
+                    xs[i] = random()*width;
+                    ys[i] = random()*height;
+                }
+                
+                
+                drawDroplet(width/2, height/2, 10);
+                createP('Raindrop Size');
+                size_slider = createSlider(1, 10, 5);
+
+                createP('Speed');
+                speed_slider = createSlider(1, 30, 10);
+            }
+            
+            
+            function draw() {
+                
+                background(250);
+                
+                colorMode(HSB, 360, 100, 100)
+                for (var x=0; x<width; x+=15) {
+            		for (var y=0; y<height; y+=15) {
+            			fill(200, 30*noise(0.008*x, 0.008*y), 80);
+            			rect(x, y, 15, 15);
+            		}		
+  	            }
+  	            
+
+  	            for (var x=0; x<width; x+=25) {
+  	                var ht = 0.8*height*noise(0.01*x);
+  	                
+                    var curhue = 200*noise(0.05*x) + 25;
+                    
+                    for (var xi=x; xi<x+25; xi+=5) {
+                        for (var yi=ht*noise(xi*0.001); yi<height; yi+=5) {
+                            fill(curhue, 40*noise(5*xi, 5*yi), 40)
+                            rect(xi, yi, 5, 5);
+                        }
+                    }
+  	             //   fill(200*noise(0.05*x) + 25, 15, 40);
+  	             //   rect(x, ht, 25, height - ht);
+  	            }
+  	            
+  	            fill(20)
+  	            rect(0, 4*height/5, width, 5);
+  	            for (var x=0; x<width; x+=40) {
+  	                rect(x, 4*height/5, 5, height - 4*height/5)
+  	            }
+  	            
+  	            colorMode(RGB, 255)
+                image(img, width/2, height/2);
+                
+                var speed = speed_slider.value();
+                var size = size_slider.value();
+                
+                for (i=0; i<xs.length; i++) {
+                    fill(173,216,230);
+                    drawDroplet(xs[i], ys[i], size)
+                    ys[i]+=random()*speed;
+                    if (ys[i] >= height)
+                        ys[i]=0;
+                }
+                
+                fill(173,216,230, 200);
+                rect(0, height-frameCount/20, width, frameCount/20);
+        
+            }
+            
+            function drawDroplet(x, y, r) {
+                
+                ellipse(x, y, r*2);
+                triangle(x, y-r*2*sqrt(3), x+r, y, x-r, y)
+            }
+            
+  
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

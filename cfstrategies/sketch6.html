@@ -1,0 +1,46 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+       <!--p5 core library-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/addons/p5.dom.js"></script>
+       <script>
+            var amplitude_slider;
+            
+            var tw = 100;
+            var th = 100;
+            var colorchanger = false;
+            
+            function setup() {
+                createCanvas(window.innerWidth, window.innerHeight);
+                strokeWeight(5);
+            
+            }
+            
+            
+            function draw() {
+               noLoop();
+               for (x=0; x<width; x+=tw) {
+                   for (y=0; y<height; y+=th) {
+                       drawTile(x, y, round(noise(x, y)), round(noise(x, y, 100)), round(noise(x, y)), round(noise(x, y, 100)));
+                   }
+               }
+                
+            
+            }
+                        
+            function drawTile(x, y, N, S, E, W) {
+                line(x + (tw/2), y + (th/2) + N*S*(th/2), x + (tw/2), y + (th/2) + S*(th/2) - N*(th/2) - N*S*(th/2));
+                line(x + (tw/2) + W*E*(tw/2), y + (th/2), x + (tw/2) + E*(tw/2) - W*(tw/2) - W*E*(tw/2), y + (th/2));
+            }
+            
+            
+
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

@@ -1,0 +1,50 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+       <!--p5 core library-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/addons/p5.dom.js"></script>
+       <script>
+       
+            // require https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js
+            
+            var EXPORT = false;
+            var color = 0; 
+            var lineweight = 10;
+            
+            function setup() {
+            	createCanvas(500, 300);
+            	horiz = random()*width/2 + 150;
+            	vert = random()*height/2 + 100;
+            }
+            
+            function draw() {
+                background(250);
+                // textAlign(CENTER, CENTER);
+                // textFont('Helvetica');
+                // text("pause", width/2, height/2);
+                color = map(frameCount, 0, 9000, 0, 250);
+                lineweight = map(frameCount, 0, 9000, 10, 0);
+                stroke(color);
+                strokeWeight(lineweight);
+                translate(width/2, height/2)
+                rotate(PI*frameCount/11520);
+                noFill();
+            	rectMode(CENTER);
+            	rect(0, 0, 180, 180);
+            	ellipse(0, 0, 180);
+            	
+
+                
+            }
+            
+
+
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

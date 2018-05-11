@@ -1,0 +1,80 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+       <!--p5 core library-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/addons/p5.dom.js"></script>
+       <script>
+       
+            // require https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js
+            
+            var EXPORT = false;
+            var poppkorn;
+            var letters =['C', 'O', 'M', 'P', 'F', 'O', 'R', 'M'];
+            var lettercount = 0;
+            var horiz, vert;
+            function preload() {
+                poppkorn = loadFont('poppkorn.ttf');
+            }
+            
+            function setup() {
+            	createCanvas(500, 300);
+            	horiz = random()*width/2 + 150;
+            	vert = random()*height/2 + 100;
+            }
+            
+            function draw() {
+            	background(50);
+            	fill(255);
+            	textFont(poppkorn);
+            	textAlign(CENTER, CENTER);
+            	textSize(250);
+            	
+            	if (frameCount%20 == 0) {
+            	    lettercount += 1
+            	    horiz = random()*width/2 + 150;
+            	    vert = random()* width/2 + 100;
+            	}
+            	
+            	if (lettercount >= letters.length) {
+                	textAlign(LEFT, BASELINE)
+                	textSize(120);
+                	text("COMP", 100, 120)
+                	text("FORM", 200, 220);
+            	}
+            	
+            	text(letters[lettercount], horiz, height/2 - 50)
+            	
+        
+                if (EXPORT) {
+                    saveFrame("EXPORT", frameCount, "jpg", 240);
+                }
+                
+            }
+            
+            function saveFrame(name, frameNumber, extension, maxFrame) {
+            	// don't save frames once we reach the max
+            	if (maxFrame && frameNumber > maxFrame) {
+            		return;
+            	}
+            
+            	if (!extension) {
+            		extension = "png";
+            	}
+            	// remove the decimal part (just in case)
+            	frameNumber = floor(frameNumber);
+            	// zero-pad the number (e.g. 13 -> 0013);
+            	var paddedNumber = ("0000" + frameNumber).substr(-4, 4);
+            
+            	save(name + "_" + paddedNumber + "." + extension);
+            }
+
+
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

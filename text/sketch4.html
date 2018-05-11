@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html style="font-family: sans-serif;">
+  <head>
+    <!--p5 core library, minified-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.13/p5.min.js" type="text/javascript"></script>
+    <!--p5 interaction with the DOM-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.13/addons/p5.dom.min.js" type="text/javascript"></script>
+    <script src="./rita-full.min.js" type="text/javascript"></script>
+    <style>
+        html {
+            background: #000;
+        }
+
+    </style>
+    <script>
+
+        var data;
+        var joined;
+        var words;
+        
+        var one = [];
+        var two = [];
+        var three = [];
+        var four = [];
+        var five = [];
+        
+        var num;
+        var line;
+    
+    
+        
+        var garamond;
+        
+        function preload() {
+          data = loadStrings('text.txt');
+          garamond = loadFont('adobegaramond.otf');
+          
+        }
+        
+        function setup() {
+            var foodAdjectives = ['cheese', 'lettuce', 'kale', 'zucchini', 'shrimp', '']
+            var foods = ['sandwiches', 'burgers', 'dumplings', 'crackers', 'chips', 'puffs', 'crisps', 'wraps']
+            var negAdjectives = ['horrible', 'miserable', 'terrible', 'horrendous']
+            var canvas = createCanvas(windowWidth, windowHeight*1.5);
+            canvas.parent('holder');
+            
+            textFont(garamond);
+            
+            var foodadj = foodAdjectives[floor(random(foodAdjectives.length))];
+            var foods = foods[floor(random(foods.length))];
+            var negadj = negAdjectives[floor(random(negAdjectives.length))]
+        
+        
+            fill(250);
+            textSize(50);
+            
+            text('when u want ' + foodadj + ' ' + foods + ' but can\'t have any', 100, 100);
+            
+            textSize(30);
+            
+            text('It was a dark and stormy night, and the smell of ' + foodadj + ' was permeating the air.', 100, 200);
+            
+            text('You might find that gross, but I didn\'t-- ' + 'It made me think of delicious ' + foodadj + ' ' + foods + '.', 100, 300)
+            text('The weather was ' + negadj + ', and I was feeling ' + negAdjectives[floor(random(negAdjectives.length))] + '.', 100, 400)
+            
+            text('The thought of ' + foodadj + ' ' + foods + ' was the only thing keeping me optimistic.', 100, 500)
+            
+            text('Of course they had to be homemade, so I went to the kitchen.', 100, 600);
+            text('But, despite the smell, there was no ' + foodadj + '.', 200, 700);
+
+            
+            
+        }
+
+
+        
+
+    </script>
+  </head>
+  <body>
+     <div id='holder'></div>
+  </body>
+</html>

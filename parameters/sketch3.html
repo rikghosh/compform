@@ -1,0 +1,77 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+       <!--p5 core library-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/addons/p5.dom.js"></script>
+       <script>
+            var size_slider;
+            var speed_slider;
+            var xs = [];
+            var ys = [];
+            var img;
+                
+            function preload() {
+                img = loadImage("man.png");
+                // image attribution: <a target="_blank" href="https://www.vexels.com/vectors/preview/129666/businessman-walking-with-umbrella"> Businessman walking with umbrella </a> |   Designed by Vexels.com
+            }
+                
+            function setup() {
+                createCanvas(window.innerWidth, window.innerHeight * .5);
+                background(250);
+                noStroke();
+                fill(173,216,230);
+                
+                
+                for (i=0; i<200; i++) {
+                    xs[i] = random()*width;
+                    ys[i] = random()*height;
+                }
+                
+                
+                drawDroplet(width/2, height/2, 10);
+                createP('Raindrop Size');
+                size_slider = createSlider(1, 10, 5);
+
+                createP('Speed');
+                speed_slider = createSlider(1, 30, 10);
+            }
+            
+            
+            function draw() {
+                
+                background(250);
+                
+                image(img, width/2, height/2);
+                
+                var speed = speed_slider.value();
+                var size = size_slider.value();
+                
+                for (i=0; i<xs.length; i++) {
+                    fill(173,216,230);
+                    drawDroplet(xs[i], ys[i], size)
+                    ys[i]+=random()*speed;
+                    if (ys[i] >= height)
+                        ys[i]=0;
+                }
+                
+                fill(173,216,230, 200);
+                rect(0, height-frameCount/20, width, frameCount/20);
+        
+            }
+            
+            function drawDroplet(x, y, r) {
+                
+                ellipse(x, y, r*2);
+                triangle(x, y-r*2*sqrt(3), x+r, y, x-r, y)
+            }
+            
+  
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

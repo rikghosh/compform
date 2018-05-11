@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html style="font-family: sans-serif;">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.sound.js" type="text/javascript"></script>
+    <style>
+    </style>
+    <script>
+    var oscOne, oscTwo, oscThree, oscFour;
+    
+    function setup() {
+
+        frameRate(16);
+        
+        oscOne = new p5.Oscillator('sine');
+        oscOne.amp(0.5);
+        oscOne.freq(261);
+        oscOne.start();
+        
+        oscTwo = new p5.Oscillator('sine');
+        oscTwo.amp(0.5);
+        oscTwo.freq(261);
+        oscTwo.start();
+        
+        oscThree = new p5.Oscillator('sine');
+        oscThree.amp(0.5);
+        oscThree.freq(261);
+        oscThree.start();
+        
+        oscFour = new p5.Oscillator('sine');
+        oscFour.amp(0.5);
+        oscFour.freq(261);
+        oscFour.start();
+        
+        
+        startButton = createButton('start');
+        startButton.mousePressed(start);
+    
+        stopButton = createButton('stop');
+        stopButton.mousePressed(stop);
+    
+        recordButton = createButton('record');
+    
+        recordButton.mousePressed(function() {
+            record(10000);
+        });
+    
+    }
+    
+    function start() {
+        oscOne.start();
+        oscTwo.start();
+        oscThree.start();
+        oscFour.start();
+    }
+    
+    function stop() {
+        oscOne.stop();
+        oscTwo.stop();
+        oscThree.stop();
+        oscFour.stop();
+    }
+    
+    function draw() {
+    
+    }
+    
+    function keyPressed() {
+      if (key == "z" || key == "Z") {
+        var frequ = 60;
+        oscOne.freq(midiToFreq(frequ))
+        oscTwo.freq(midiToFreq(frequ + 4))
+        oscThree.freq(midiToFreq(frequ + 7))
+      } else if (key == "x" || key == "X") {
+        var frequ = 55;
+        oscOne.freq(midiToFreq(frequ))
+        oscTwo.freq(midiToFreq(frequ + 4))
+        oscThree.freq(midiToFreq(frequ + 7))
+      } else if (key == "c" || key == "C") {
+        var frequ = 57;
+        oscOne.freq(midiToFreq(frequ))
+        oscTwo.freq(midiToFreq(frequ + 3))
+        oscThree.freq(midiToFreq(frequ + 7))
+      } else if (key == "v" || key == "V") {
+        var frequ = 53;
+        oscOne.freq(midiToFreq(frequ))
+        oscTwo.freq(midiToFreq(frequ + 4))
+        oscThree.freq(midiToFreq(frequ + 7))
+      } else if (key == "q" || key == "Q") {
+        oscFour.freq(midiToFreq(59 + 12))
+      } else if (key == "a" || key == "A") {
+        oscFour.freq(midiToFreq(60 + 12))
+      } else if (key == "s" || key == "S") {
+        oscFour.freq(midiToFreq(62))
+      } else if (key == "d" || key == "D") {
+        oscFour.freq(midiToFreq(64))
+      } else if (key == "f" || key == "F") {
+        oscFour.freq(midiToFreq(65))
+      } else if (key == "g" || key == "G") {
+        oscFour.freq(midiToFreq(69))
+      } else if (key == "y" || key == "Y") {
+        oscFour.freq(midiToFreq(71))
+      } else if (key == "b" || key == "B") {
+        oscFour.freq(midiToFreq(72))
+      } else if (key == "h" || key == "H") {
+        oscFour.freq(midiToFreq(74))
+      } else if (key == "u" || key == "U") {
+        oscFour.freq(midiToFreq(76))
+      } else if (key == "n" || key == "N") {
+        oscFour.freq(midiToFreq(77))
+      } else if (key == "j" || key == "J") {
+        oscFour.freq(midiToFreq(79))
+      } else if (key == "i" || key == "I") {
+        oscFour.freq(midiToFreq(81))
+      } else if (key == "o" || key == "O") {
+        oscFour.freq(midiToFreq(83))
+      } else if (key == "p" || key == "P") {
+        oscFour.freq(midiToFreq(84))
+      }
+    }
+    
+    
+    // uses the p5 SoundRecorder and SoundFile classes to record the audio output.
+    // begins recording when called. records for _length_ time in milliseconds.
+    function record(length) {
+        var soundRecorder = new p5.SoundRecorder();
+        var soundFile = new p5.SoundFile();
+        soundRecorder.record(soundFile);
+        setTimeout(function() {
+            console.log("Recording Complete");
+            soundRecorder.stop();
+            save(soundFile, "output.wav");
+        }, length);
+    }
+
+
+        
+
+    </script>
+  </head>
+  <body>
+     <div id='holder'></div>
+  </body>
+</html>

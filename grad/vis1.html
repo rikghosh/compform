@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+   <head>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script>
+           var voices = []; 
+           var times = [[], []];
+           var pitches = [[], []];
+           var durations = [[], []];
+           var table;
+           
+           
+           function preload() {
+               table = loadTable("data/mozart_sonata.csv", "csv", "header");
+           }
+           
+           function setup() {
+               createCanvas(windowWidth, windowHeight);
+               
+               colorMode(HSB, 360, 100, 100, 100);
+               noStroke();
+               
+               voices[0] = table.findRows("1", "part")
+               voices[1] = table.findRows("2", "part")
+               
+               
+               for (var i=0; i < voices[0].length-1; i++) {
+                   times[0].push(voices[0][i].obj.start_secs)
+                   pitches[0].push(voices[0][i].obj.pitch)
+                   durations[0].push(voices[0][i].obj.dur_secs)
+               }
+               
+               for(var i=0; i < voices[1].length-1; i++) {
+                   times[1].push(voices[1][i].obj.start_secs)
+                   pitches[1].push(voices[1][i].obj.pitch)
+                   durations[1].push(voices[1][i].obj.dur_secs)
+               }
+               
+               console.log(times[0])
+              
+               
+               for (var i=0; i<times[0].length-1; i++) {
+                   var xpos = timeToWidth(times[0][i]);
+                   var ypos = pitchToHeight(pitches[0][i]);
+                   var len = timeToWidth(durations[0][i]);
+                   fill(66, 29, 42, 30);
+                   rect(xpos, ypos, len, 10 , 5);
+               }
+               
+               for(var i=0; i<times[1].length-1; i++) {
+                   var xpos = timeToWidth(times[1][i]);
+                   var ypos = pitchToHeight(pitches[1][i]);
+                   var len = timeToWidth(durations[1][i]);
+                   fill(211, 21, 65, 30);
+                   rect(xpos, ypos, len, 10, 5);
+               }
+           }
+           
+           function timeToWidth (input) {
+               var minTime = min(min(times[0]), min(times[1]));
+               var maxTime = max(max(times[0]), max(times[1]));
+               return map(input, minTime, maxTime, 10, width-50)
+           }
+           
+           function pitchToHeight (input) {
+               var minPitch = min(min(pitches[0]), min(pitches[1]));
+               var maxPitch = max(max(pitches[0]), max(pitches[1]));
+               return map(input, minPitch, maxPitch, height*(2/4), height/4)
+           }
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

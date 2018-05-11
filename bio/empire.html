@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+   <head>
+       <!--p5 core library-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script>
+           function preload() {
+               img = loadImage("empire.png")
+           }
+           function setup() {
+               createCanvas(windowWidth, windowHeight);
+            //   for (var i = 1; i < 35000; i++) {
+            //       image(img, random(width), random(height), img.width/70, img.height/70)
+            //   }
+               
+
+           }
+           function draw() {
+                if(frameCount <= 225) {
+                    for (var i = 0; i <= 120; i ++) {
+                        image(img, random(width), random(height), img.width/50, img.height/50)
+                    }
+                    
+                }
+
+           }
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html style="font-family: sans-serif;">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.sound.js" type="text/javascript"></script>
+    <style>
+    </style>
+    <script>
+    var oscOne, oscTwo;
+    
+    function setup() {
+
+        frameRate(16);
+        
+        oscOne = new p5.Oscillator('sine');
+        oscOne.amp(0.5);
+        oscOne.freq(261);
+        oscOne.start();
+        
+        oscTwo = new p5.Oscillator('sine');
+        oscTwo.amp(0.5);
+        oscTwo.freq(261);
+        oscTwo.start();
+        
+        startButton = createButton('start');
+        startButton.mousePressed(start);
+    
+        stopButton = createButton('stop');
+        stopButton.mousePressed(stop);
+    
+        recordButton = createButton('record');
+    
+        recordButton.mousePressed(function() {
+            record(10000);
+        });
+    
+    }
+    
+    function start() {
+        oscOne.start();
+        oscTwo.start();
+    }
+    
+    function stop() {
+        oscOne.stop();
+        oscTwo.stop();
+    }
+    
+    function draw() {
+    
+    }
+    
+    function keyPressed() {
+      if (key == "q" || key == "Q") {
+        oscOne.freq(midiToFreq(59))
+      } else if (key == "a" || key == "A") {
+        oscOne.freq(midiToFreq(60))
+      } else if (key == "s" || key == "S") {
+        oscOne.freq(midiToFreq(62))
+      } else if (key == "d" || key == "D") {
+        oscOne.freq(midiToFreq(64))
+      } else if (key == "f" || key == "F") {
+        oscOne.freq(midiToFreq(65))
+      } else if (key == "v" || key == "V") {
+        oscOne.freq(midiToFreq(67))
+      } else if (key == "g" || key == "G") {
+        oscTwo.freq(midiToFreq(71))
+      } else if (key == "b" || key == "B") {
+        oscTwo.freq(midiToFreq(72))
+      } else if (key == "h" || key == "H") {
+        oscTwo.freq(midiToFreq(74))
+      } else if (key == "j" || key == "J") {
+        oscTwo.freq(midiToFreq(76))
+      } else if (key == "k" || key == "K") {
+        oscTwo.freq(midiToFreq(77))
+      } else if (key == "l" || key == "L") {
+        oscTwo.freq(midiToFreq(79))
+      } else if (key == "p" || key == "P") {
+        oscTwo.freq(midiToFreq(81))
+      }
+    }
+    
+    
+    // uses the p5 SoundRecorder and SoundFile classes to record the audio output.
+    // begins recording when called. records for _length_ time in milliseconds.
+    function record(length) {
+        var soundRecorder = new p5.SoundRecorder();
+        var soundFile = new p5.SoundFile();
+        soundRecorder.record(soundFile);
+        setTimeout(function() {
+            console.log("Recording Complete");
+            soundRecorder.stop();
+            save(soundFile, "output.wav");
+        }, length);
+    }
+
+
+        
+
+    </script>
+  </head>
+  <body>
+     <div id='holder'></div>
+  </body>
+</html>

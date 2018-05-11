@@ -1,0 +1,62 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+       <!--p5 core library-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script type="text/javascript" src="turtle.js"></script>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/addons/p5.dom.js"></script>
+       <script>
+       
+            // require https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js
+            // require /turtles/turtle/turtle.js
+            
+            var myTurtle;
+            
+            
+            function setup() {
+            	createCanvas(window.innerWidth, window.innerHeight);
+            	myTurtle = new Turtle();
+            
+            }
+            
+            function draw() {
+            	background(255);
+            
+            	noFill();
+            	stroke(0, 80);
+            	strokeWeight(2);
+            
+            
+            	myTurtle.penUp();
+            
+                drawFlower(width/2, height/2, 80, 100)
+                
+                for (var j = 0; j < 20; j++) {
+                    drawFlower(random(width), random(height), random(360), random(300));
+                }
+            
+            	frameRate(5);
+            	
+            	noLoop();
+            }
+            
+            function drawFlower(x, y, angle, size) {
+                myTurtle.moveTo(x, y);
+                myTurtle.penDown();
+                stroke(random(255), random(255), random(255), 80);
+                for (var i = 0; i < size; i++) {
+            		myTurtle.moveForward(5 + i);
+            		myTurtle.turnRight(angle + i/10);
+            	}
+            	myTurtle.penUp();
+            }
+
+
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

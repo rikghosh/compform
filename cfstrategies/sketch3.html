@@ -1,0 +1,84 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+       <!--p5 core library-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/addons/p5.dom.js"></script>
+       <script>
+            var amplitude_slider;
+            
+            var tw = 100;
+            var th = 100;
+            
+            function setup() {
+                createCanvas(window.innerWidth, window.innerHeight);
+                strokeWeight(5);
+            
+            }
+            
+            
+            function draw() {
+                background(250);
+                
+                translate(width/2 - 120, height / 2);
+                //rotate((frameCount/60)*PI / 3.0);
+                
+                // first row
+                drawTile(-400, -200, false, true, false, false);
+                //drawTile(-300, -200, false, false, false, false);
+                //drawTile(-200, -200, false, false, false, false);
+                //drawTile(-100, -200, false, false, false, false);
+                drawTile(0, -200, false, true, false, false);
+                drawTile(100, -200, false, true, false, false);
+                //drawTile(200, -200, false, false, false, false);
+                //drawTile(300, -200, false, false, false, false);
+                
+                // second row
+                drawTile(-400, -100, true, true, true, false);
+                drawTile(-300, -100, false, true, false, true);
+                drawTile(-200, -100, false, true, true, false);
+                drawTile(-100, -100, false, true, false, true);
+                drawTile(0, -100, true, true, false, false);
+                drawTile(100, -100, true, true, false, false);
+                drawTile(200, -100, false, true, true, false);
+                drawTile(300, -100, false, true, false, true);
+                
+                // third row
+                drawTile(-400, 0, true, true, false, false);
+                drawTile(-300, 0, true, true, false, false);
+                drawTile(-200, 0, true, true, true, false);
+                drawTile(-100, 0, true, false, false, true);
+                drawTile(0, 0, true, true, false, false);
+                drawTile(100, 0, true, true, false, false);
+                drawTile(200, 0, true, true, false, false);
+                drawTile(300, 0, true, true, false, false);
+                
+                // fourth row
+                drawTile(-400, 100, true, false, false, false);
+                drawTile(-300, 100, true, false, false, false);
+                drawTile(-200, 100, true, false, true, false);
+                drawTile(-100, 100, false, false, false, true);
+                drawTile(0, 100, true, false, false, false);
+                drawTile(100, 100, true, false, false, false);
+                drawTile(200, 100, true, false, true, false);
+                drawTile(300, 100, true, false, false, true);
+                
+                
+             
+            
+            }
+                        
+            function drawTile(x, y, N, S, E, W) {
+                line(x + (tw/2), y + (th/2) + N*S*(th/2), x + (tw/2), y + (th/2) + S*(th/2) - N*(th/2) - N*S*(th/2));
+                line(x + (tw/2) + W*E*(tw/2), y + (th/2), x + (tw/2) + E*(tw/2) - W*(tw/2) - W*E*(tw/2), y + (th/2));
+            }
+            
+
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

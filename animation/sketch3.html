@@ -1,0 +1,79 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+       <!--p5 core library-->
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/addons/p5.dom.js"></script>
+       <script>
+       
+            // require https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js
+            
+            var EXPORT = false;
+            var poppkorn;
+            var letters =['C', 'O', 'M', 'P', 'F', 'O', 'R', 'M'];
+            var lettercount = 0;
+            var horiz, vert;
+            var tstart;
+            function preload() {
+                poppkorn = loadFont('poppkorn.ttf');
+            }
+            
+            function setup() {
+            	createCanvas(500, 300);
+            	tstart = height + 50;
+            	horiz = random()*width/2 + 150;
+            	vert = random()*height/2 + 100;
+            }
+            
+            function draw() {
+                rotate(PI/frameCount)
+            	background(50);
+            	fill(255);
+            	textFont(poppkorn);
+            	
+            	
+            	textAlign(CENTER, BASELINE)
+            	textSize(120);
+            	
+            	var compy = frameCount*2.5;
+            	
+            	if (compy >= 120) {
+                    text("COMP", width/2, 120)
+            	}
+            	else {
+            	    text("COMP", width/2, compy^2)
+            	}
+            	text("FORM", width/2, 220);
+            	noFill();
+            	stroke('white');
+            	
+            	if (compy >= 270) {
+                	drawTriangle(width/2, 0, tstart, 'up');
+                	drawTriangle(width/2, (tstart/2)*sqrt(3)/2, tstart/2, 'down');
+                	drawTriangle(width/2+tstart/4, (tstart/2)*sqrt(3)/2+(tstart/4)*sqrt(3)/2, tstart/4, 'down');
+            	}
+            
+
+                
+            }
+            
+            function drawTriangle(startx, starty, slength, direction) {
+                if (direction == 'up') {
+                    triangle(startx, starty, startx-slength/2, starty+(slength/2)*sqrt(3), startx+slength/2, starty+(slength/2)*sqrt(3));
+                }
+                if (direction == 'down') {
+                    triangle(startx, starty + (slength/2)*sqrt(3), startx-slength/2, starty, startx+slength/2, starty);
+                }
+                
+                
+            }
+
+
+       </script>
+   </head>
+   <body>
+       
+   </body>
+</html>

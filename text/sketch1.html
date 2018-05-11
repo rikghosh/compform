@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html style="font-family: sans-serif;">
+  <head>
+    <!--p5 core library, minified-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.13/p5.min.js" type="text/javascript"></script>
+    <!--p5 interaction with the DOM-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.13/addons/p5.dom.min.js" type="text/javascript"></script>
+    <script src="./rita-full.min.js" type="text/javascript"></script>
+    <style>
+        html {
+            background: #f5f5f5;
+        }
+
+    </style>
+    <script>
+
+        var data;
+        var joined;
+        var words;
+        
+        var nouns = [];
+        var verbs = [];
+        var adjectives = [];
+        var adverbs = [];
+        
+        var garamond;
+        
+        function preload() {
+          data = loadStrings('text.txt');
+          garamond = loadFont('garamonditalic.ttf');
+          
+        }
+        
+        function setup() {
+            var canvas = createCanvas(windowWidth, windowHeight*1.5);
+            canvas.parent('holder');
+            
+            textFont(garamond);
+            
+            
+            
+            var joined = data.join('\n')
+            
+            words = RiTa.tokenize(joined)
+            
+            words.forEach(function(word) {
+                if (RiTa.isNoun(word) && word.length>4) {
+                    nouns.push(word);
+                }
+                if (RiTa.isVerb(word) && word.length>4 && word.slice(word.length-3, word.length) != 'ing' && word.slice(word.length-2, word.length) != 'ed') {
+                    verbs.push(word);
+                }
+                if (RiTa.isAdjective(word) && word.length>4) {
+                    adjectives.push(word);
+                }
+                if (RiTa.isAdverb(word) && word.slice(word.length-2, word.length) == 'ly') {
+                    adverbs.push(word);
+                }
+            });
+            
+            console.log(nouns);
+            console.log(verbs);
+            console.log(adjectives);
+            console.log(adverbs);
+            
+            var trial = "hello";
+            
+            textSize(50);
+            
+            //text("One day, " + randWord('noun') + " went to the " + randWord('noun') + " and decided to " + randWord('verb'), 0, 50);
+            
+            text(RiTa.getPresentParticiple(rverb()) + ' is like ' + RiTa.getPresentParticiple(rverb()), 100, 100)
+            text(RiTa.getPresentParticiple(rverb()) + ' is like ' + RiTa.getPresentParticiple(rverb()), 100, 200)
+            text(RiTa.getPresentParticiple(rverb()) + ' is like ' + RiTa.getPresentParticiple(rverb()), 100, 300)
+            text('and ' + RiTa.getPresentParticiple(rverb()) + ' is like ' + RiTa.getPresentParticiple(rverb()), 100, 400)
+            
+            text('but ' + rnoun() + ' is ' + radj(), 100, 600)
+            text('and ' + radj() + ' is ' + rnoun(), 100, 700)
+            
+            text(radv() + ', we all ' + rverb() + '.', 100, 900)
+
+            
+            
+        }
+        
+        function rnoun() {
+            return nouns[floor(random(nouns.length))]
+        }
+        
+        function rverb() {
+            return verbs[floor(random(verbs.length))]
+        }
+        
+        function radj() {
+            return adjectives[floor(random(adjectives.length))]
+        }
+        
+        function radv() {
+             return adverbs[floor(random(adverbs.length))]
+        }
+        
+        
+        // function randWord (pos) {
+        //     if (pos = 'noun') {
+        //         return nouns[floor(random(nouns.length))]   
+        //     }
+            
+        //     if (pos = 'verb') {
+        //         return verbs[floor(random(verbs.length))]   
+        //     }
+            
+        //     if (pos = 'adj') {
+        //         return adjectives[floor(random(adjectives.length))]   
+        //     }
+            
+        //     if (pos = 'adv') {
+        //         return adverbs[floor(random(adverbs.length))]   
+        //     }
+        // }
+
+
+        
+
+    </script>
+  </head>
+  <body>
+     <div id='holder'></div>
+  </body>
+</html>
